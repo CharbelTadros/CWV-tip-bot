@@ -3,8 +3,8 @@
 	"rpc": {
 		"host": "139.99.193.84",
 		"port": 39044,
-		"user": "user",
-		"password": "password"
+		"user": "rpc_cryptowave",
+		"password": "7a189db0b5433fe805b7e107a"
 	},
 	"mongo": {
 		"host": "localhost",
