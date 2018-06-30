@@ -118,8 +118,8 @@ def get_address(user):
 
 
 def start(bot, update):
-	update.message.reply_text('Hello! I\'m a tipbot for the RPICoin crypto. ' +
-							  'Add me to a group and start tipping!')
+	update.message.reply_text('Hello! I\'m a bot for Cryptowave ' +
+							  'Add me to a group and start using CWV!')
 
 	add_to_chat(get_user(update.message.from_user.id), update.message.chat_id)
 
@@ -145,13 +145,13 @@ def tip(bot, update):
 					from_user = give_balance(from_user, -amount)
 					user = give_balance(user, amount)
 					bot.sendMessage(chat_id=update.message.chat_id,
-									text="%s tipped %s %f RPI" % (
+									text="%s tipped %s %f CWV" % (
 										from_user['username'],
 										args[0],
 										amount
 									))
 				else:
-					update.message.reply_text("Not enough money!")
+					update.message.reply_text("Not enough Cryptowave!")
 			else:
 				update.message.reply_text("Invalid amount!")
 		else:
@@ -201,7 +201,7 @@ def soak(bot, update):
 						give_balance(user, tip)
 
 					bot.sendMessage(chat_id=update.message.chat_id,
-									text="%s soaked %f RPI to %s!" % (
+									text="%s soaked %f CWV to %s!" % (
 										from_user['username'],
 										tip,
 										users_str
@@ -210,7 +210,7 @@ def soak(bot, update):
 					update.message.reply_text("No users on this channel have"
 											  " interacted with the bot.")
 			else:
-				update.message.reply_text("Not enough money!")
+				update.message.reply_text("Not enough CWV!")
 		else:
 			update.message.reply_text("Invalid amount")
 	else:
@@ -232,7 +232,7 @@ def balance(bot, update):
 		unconfirmed = "(+ %s unconfirmed)" % \
 					  get_unconfirmed(get_user(update.message.from_user.id))
 
-	update.message.reply_text("You have %s RPI (%f USD) %s" %
+	update.message.reply_text("You have %s CWV (%f USD) %s" %
 							  (bal, usd, unconfirmed))
 
 	add_to_chat(get_user(update.message.from_user.id), update.message.chat_id)
@@ -293,17 +293,17 @@ def withdraw(bot, update):
 										config['rpc']['password'],
 										config['rpc']['host'],
 										config['rpc']['port']))
-				rpc.settxfee(0.5)
+				rpc.settxfee(0.01)
 				txid = rpc.sendtoaddress(args[0], amount-1)
 				give_balance(get_user(update.message.from_user.id), -amount)
 				update.message.reply_text(
-					"Withdrew %f RPI! TX: %s" %
-					(amount-1, "https://explorer.rpicoin.com/tx/" + txid))
+					"Withdrew %f CWV! TX: %s" %
+					(amount-1, "https://explorer.cryptoways.com/" + txid))
 			else:
 				update.message.reply_text("Invalid address")
 		else:
 			update.message.reply_text("amount has to be more than 1, and " +
-									  "you need to have enough RPI Coins")
+									  "you need to have enough CWV")
 	else:
 		update.message.reply_text("Usage: /withdraw <address> <amount>")
 
